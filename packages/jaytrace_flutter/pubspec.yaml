@@ -1,0 +1,14 @@
+name: jaytrace_flutter
+description: Lightweight JayTrace event-based replay SDK for Flutter.
+version: 0.1.0
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lints: ^4.0.0

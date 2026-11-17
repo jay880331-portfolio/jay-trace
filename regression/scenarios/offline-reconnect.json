@@ -1,0 +1,30 @@
+{
+  "scenario": "offline-reconnect",
+  "input": [
+    {
+      "file": "replay-react-native-2026-07-01T12-00-00-000Z.json",
+      "document": {
+        "schema": "jaytrace.replay.v1",
+        "platform": "react-native",
+        "traceId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "sessionId": "session-offline-rn",
+        "mode": "on-error",
+        "startedAt": "2026-07-01T12:00:00.000Z",
+        "endedAt": "2026-07-01T12:00:15.000Z",
+        "metadata": { "view.name": "Checkout", "replay.screenshot": "missing" },
+        "events": [
+          "0.000s route screen Checkout",
+          "2.100s gesture action RetryPayment",
+          "5.000s network POST redacted error=Network request failed",
+          "14.000s network POST redacted status=201 durationMs=90"
+        ]
+      }
+    }
+  ],
+  "expected": {
+    "lostEvents": 0,
+    "containsFailureAndRecovery": true,
+    "sameSessionId": "session-offline-rn",
+    "dashboardBadges": ["network:error", "network:recovered"]
+  }
+}

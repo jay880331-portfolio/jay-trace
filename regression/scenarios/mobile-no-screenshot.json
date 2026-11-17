@@ -1,0 +1,35 @@
+{
+  "scenario": "mobile-no-screenshot",
+  "input": [
+    {
+      "file": "replay-flutter-2026-07-01T12-20-00-000Z.json",
+      "document": {
+        "schema": "jaytrace.replay.v1",
+        "platform": "flutter",
+        "traceId": "cccccccccccccccccccccccccccccccc",
+        "sessionId": "session-flutter-no-shot",
+        "mode": "on-error",
+        "startedAt": "2026-07-01T12:20:00.000Z",
+        "endedAt": "2026-07-01T12:20:06.000Z",
+        "metadata": {
+          "view.name": "Checkout",
+          "replay.screenshot": "missing",
+          "release": "flutter-1.9.0",
+          "environment": "prod"
+        },
+        "events": [
+          "0.000s route route Checkout",
+          "1.200s gesture tap PayButton x=140 y=620",
+          "3.000s network POST redacted status=503 durationMs=44",
+          "3.100s error error StateError: payment failed"
+        ]
+      }
+    }
+  ],
+  "expected": {
+    "rendersWithoutFrames": true,
+    "showsScreenshotsMissing": true,
+    "containsTapCoordinates": true,
+    "platformFilter": "flutter"
+  }
+}

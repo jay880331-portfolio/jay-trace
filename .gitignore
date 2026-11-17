@@ -1,0 +1,47 @@
+node_modules/
+dist/
+build/
+.dart_tool/
+*.tsbuildinfo
+.DS_Store
+.serena
+.codegraph/
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Next.js build output
+.next/
+.next-console/
+
+# Superpowers scratch
+.superpowers/
+
+# Flutter
+packages/jaytrace_flutter/.flutter-plugins*
+packages/jaytrace_flutter/pubspec.lock
+
+# Local-only tool state
+.claude/settings.local.json
+_workspace/
+.jaytrace-smoke/
+*.log
+coverage/
+
+# Amplify deploy output
+.amplify-hosting/
+.amplify/
+*.pem
+*.p8
+*.keystore
+google-services.json
+GoogleService-Info.plist
+.claude/
+.agents/
+.serena/
+.omo/
+CLAUDE.md
+AGENTS.md
+MEMORY.md

@@ -1,0 +1,47 @@
+version: 1
+applications:
+  - appRoot: apps/next-app
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - corepack enable
+            # node-linker=hoisted: Amplify's SSR bundler can't follow pnpm's
+            # symlinked node_modules, so install real files npm-style.
+            - pnpm install --frozen-lockfile --config.node-linker=hoisted
+        build:
+          commands:
+            # Amplify env vars exist only at build time; bake JAYTRACE_* into
+            # .env.production so the SSR runtime (Lambda) can read them too.
+            - env | grep -E '^JAYTRACE_' >> .env.production || true
+            # SSR 런타임엔 AWS_REGION이 없어 S3 클라이언트가 us-east-1로 폴백한다.
+            # 빌드 컨테이너의 리전을 굽되, 없으면 앱 리전으로 고정.
+            - echo "AWS_REGION=${AWS_REGION:-ap-northeast-2}" >> .env.production
+            - pnpm --filter "@jaytrace/example-next-app..." build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - "node_modules/**/*"
+  - appRoot: apps/nest-api
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - corepack enable
+            # hoisted 불필요: pnpm deploy가 심링크 없는 격리 설치본을 만든다
+            - pnpm install --frozen-lockfile
+        build:
+          commands:
+            - pnpm --filter "@jaytrace/example-nest-api..." build
+            # cwd는 appRoot(apps/nest-api)라 리포 루트 기준 경로를 쓰면 안 된다
+            - bash scripts/amplify-postbuild.sh
+      artifacts:
+        baseDirectory: .amplify-hosting
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - "node_modules/**/*"

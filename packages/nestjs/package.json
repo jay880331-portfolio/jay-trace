@@ -1,0 +1,52 @@
+{
+  "name": "@jaytrace/nestjs",
+  "version": "0.1.0",
+  "description": "JayTrace NestJS module with trace context, text timelines, and fire-and-forget S3 export.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && pnpm exec esbuild src/index.ts --bundle --platform=node --target=node20 --format=cjs --packages=external --outfile=dist/index.cjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm build && node dist/self-check.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.726.1",
+    "@jaytrace/core": "workspace:*",
+    "@jaytrace/node": "workspace:*",
+    "@jaytrace/replay-core": "workspace:*",
+    "@opentelemetry/api": "^1.9.1"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0 || ^11.0.0",
+    "@nestjs/core": "^10.0.0 || ^11.0.0",
+    "rxjs": "^7.8.0"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
+    "@types/node": "^20.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaytrace/packages.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "@jaytrace/example-next-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev -p 3001",
+    "start": "next start -p 3001",
+    "test": "tsx scripts/self-check.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.726.1",
+    "@jaytrace/browser": "workspace:*",
+    "@jaytrace/replay-core": "workspace:*",
+    "mysql2": "^3.23.1",
+    "next": "^15.1.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "rrweb": "2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "@types/react": "^19.0.8",
+    "tsx": "4.23.12",
+    "typescript": "^5.7.3"
+  }
+}

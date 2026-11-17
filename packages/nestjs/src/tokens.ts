@@ -1,0 +1,3 @@
+export const JAYTRACE_OPTIONS = Symbol("JAYTRACE_OPTIONS");
+export const JAYTRACE_EXPORTER = Symbol("JAYTRACE_EXPORTER");
+export const JAYTRACE_METRICS = Symbol("JAYTRACE_METRICS");

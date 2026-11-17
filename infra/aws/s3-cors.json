@@ -1,0 +1,20 @@
+[
+  {
+    "AllowedHeaders": [
+      "authorization",
+      "content-type",
+      "x-amz-date"
+    ],
+    "AllowedMethods": [
+      "GET",
+      "HEAD"
+    ],
+    "AllowedOrigins": [
+      "http://localhost:*"
+    ],
+    "ExposeHeaders": [
+      "etag"
+    ],
+    "MaxAgeSeconds": 300
+  }
+]

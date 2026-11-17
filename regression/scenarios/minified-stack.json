@@ -1,0 +1,48 @@
+{
+  "scenario": "minified-stack",
+  "input": [
+    {
+      "file": "front-2026-07-01T12-10-00-000Z.json",
+      "document": {
+        "schema": "jaytrace.timeline.v1",
+        "service": "web",
+        "side": "front",
+        "traceId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "traceparent": "00-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-1111111111111111-01",
+        "startedAt": "2026-07-01T12:10:00.000Z",
+        "endedAt": "2026-07-01T12:10:03.000Z",
+        "summary": "Minified checkout error before payment API call.",
+        "context": { "url": "/checkout", "release": "web-2.4.1", "environment": "prod" },
+        "error": {
+          "name": "TypeError",
+          "message": "Cannot read properties of undefined",
+          "stack": "TypeError: Cannot read properties of undefined at t.pay (app-4f3a9c.js:1:42311)"
+        },
+        "timeline": [
+          "0.000s navigation info page loaded /checkout",
+          "2.900s error error TypeError Cannot read properties of undefined"
+        ]
+      }
+    },
+    {
+      "file": "back-2026-07-01T12-10-03-050Z.json",
+      "document": {
+        "schema": "jaytrace.timeline.v1",
+        "service": "api",
+        "side": "back",
+        "traceId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "traceparent": "00-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb-2222222222222222-01",
+        "startedAt": "2026-07-01T12:10:03.000Z",
+        "endedAt": "2026-07-01T12:10:03.050Z",
+        "summary": "POST /api/pay returned 500.",
+        "context": { "route": "/api/pay", "method": "POST", "statusCode": 500 },
+        "timeline": ["0.000s request info request POST /api/pay", "0.050s error error PaymentGatewayError"]
+      }
+    }
+  ],
+  "expected": {
+    "joinedByTraceId": true,
+    "release": "web-2.4.1",
+    "aiPromptContains": ["app-4f3a9c.js:1:42311", "POST /api/pay", "PaymentGatewayError"]
+  }
+}

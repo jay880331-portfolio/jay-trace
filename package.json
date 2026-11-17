@@ -1,0 +1,42 @@
+{
+  "name": "jay-trace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zero-cost full-stack observability toolkit backed by S3 and local AI analysis.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "bench:console": "node scripts/console-bench.mjs",
+    "build": "pnpm -r build",
+    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm test:regression && pnpm flutter:check",
+    "dev:api": "pnpm --filter @jaytrace/example-nest-api dev",
+    "dev:console": "node apps/next-app/scripts/dev-console.mjs",
+    "dev:console:s3": "node --env-file=apps/nest-api/.env apps/next-app/scripts/dev-console.mjs",
+    "flutter:analyze": "cd packages/jaytrace_flutter && flutter analyze",
+    "flutter:check": "pnpm flutter:pubget && pnpm flutter:analyze && pnpm flutter:test",
+    "flutter:pubget": "cd packages/jaytrace_flutter && flutter pub get",
+    "flutter:test": "cd packages/jaytrace_flutter && dart run test/self_check.dart && flutter test test/widgets_self_check.dart",
+    "load:collector": "node scripts/load-test.mjs",
+    "smoke:admin-nest": "node apps/next-app/scripts/admin-nest-smoke.mjs",
+    "smoke:sample-nest": "node apps/next-app/scripts/sample-nest-smoke.mjs",
+    "smoke:sample-web-web": "node apps/next-app/scripts/sample-web-web-smoke.mjs",
+    "smoke:sample-web-replay-v2": "node apps/next-app/scripts/sample-web-replay-v2-smoke.mjs",
+    "smoke:mobile-s3": "node apps/next-app/scripts/mobile-s3-smoke.mjs",
+    "smoke:replay-visual": "node apps/next-app/scripts/replay-visual-check.mjs",
+    "smoke:wireframe-console": "node apps/next-app/scripts/wireframe-console-smoke.mjs",
+    "smoke:rn-wireframe-console": "node apps/next-app/scripts/rn-wireframe-console-smoke.mjs",
+    "test": "pnpm -r test && pnpm test:dual-packages",
+    "test:dual-packages": "node scripts/dual-package-self-check.mjs",
+    "test:otel-e2e": "node regression/otel-e2e/run-otel-e2e.mjs",
+    "test:regression": "node regression/run-regression.mjs",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "@jaytrace/cli": "workspace:*",
+    "@jaytrace/node": "workspace:*",
+    "amqplib": "^2.0.1",
+    "esbuild": "0.25.10",
+    "typescript": "^5.7.3"
+  }
+}

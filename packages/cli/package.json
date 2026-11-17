@@ -1,0 +1,41 @@
+{
+  "name": "@jaytrace/cli",
+  "version": "0.1.0",
+  "description": "JayTrace local CLI for joining S3-synced front/back timeline files and sending them to local AI.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "jaytrace-check": "./bin/jaytrace-check"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/make-bin-executable.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm build && node dist/self-check.js"
+  },
+  "dependencies": {
+    "@jaytrace/core": "workspace:*",
+    "@jaytrace/replay-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaytrace/packages.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

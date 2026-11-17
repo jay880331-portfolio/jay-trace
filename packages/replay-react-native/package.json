@@ -1,0 +1,55 @@
+{
+  "name": "@jaytrace/replay-react-native",
+  "version": "0.1.0",
+  "description": "JayTrace lightweight event-based replay SDK for React Native.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/root.d.ts",
+      "default": "./dist/root.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "pnpm --filter @jaytrace/replay-core build && tsc -p tsconfig.json",
+    "typecheck": "pnpm --filter @jaytrace/replay-core build && tsc -p tsconfig.json --noEmit",
+    "test": "pnpm build && node dist/self-check.js"
+  },
+  "dependencies": {
+    "@jaytrace/core": "workspace:*",
+    "@jaytrace/replay-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native": ">=0.72"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaytrace/packages.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
